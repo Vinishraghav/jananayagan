@@ -53,6 +53,62 @@ p {
   margin-bottom: 24px;
 }
 
+.video-input {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.video-input label {
+  font-weight: 600;
+  color: #e6e6f0;
+}
+
+.video-input input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid #2f2f3f;
+  background: #11111a;
+  color: #f8f8f2;
+}
+
+.video-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.button,
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+button {
+  background: #8be9fd;
+  color: #0b0b0f;
+}
+
+button:hover,
+.button:hover {
+  transform: translateY(-1px);
+}
+
+.button.secondary {
+  background: #44475a;
+  color: #f8f8f2;
+}
+
 video {
   width: 100%;
   max-height: 640px;
