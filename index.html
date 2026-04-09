@@ -3,89 +3,226 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Jananayagan - Stream and share your large video files with ease. Upload once, share everywhere." />
+    <meta name="keywords" content="video, streaming, jananayagan, share, host" />
+    <meta name="author" content="Vinishraghav" />
+    <meta property="og:title" content="Jananayagan Video Showcase" />
+    <meta property="og:description" content="Stream your video from external hosting with a beautiful, responsive player." />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#8be9fd" />
+    <meta name="color-scheme" content="dark" />
+    
     <title>Jananayagan Video Showcase</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div class="page">
       <header>
-        <h1>Jananayagan Video Showcase</h1>
-        <p>
-          Paste your hosted video URL below and play it directly from the page.
-        </p>
+        <h1>Jananayagan</h1>
+        <p class="tagline">Your video hosting solution — elegant, simple, and powerful.</p>
       </header>
 
       <main>
         <section class="video-panel">
           <div class="video-input">
             <label for="videoUrl">Video URL</label>
-            <input
-              id="videoUrl"
-              type="url"
-              placeholder="https://example.com/your-video.mp4"
-              value="https://example.com/your-video.mp4"
-            />
+            <div class="input-group">
+              <input id="videoUrl" type="url" placeholder="https://example.com/your-video.mp4" value="" />
+              <button id="clearButton" type="button" class="icon-btn" title="Clear input">✕</button>
+            </div>
             <div class="video-actions">
-              <button id="loadButton" type="button">Load video</button>
-              <a id="downloadButton" class="button secondary" href="https://example.com/your-video.mp4" target="_blank" rel="noopener noreferrer">Open / Download</a>
+              <button id="loadButton" type="button" class="primary">Load video</button>
+              <a id="downloadButton" class="button secondary" href="#" target="_blank" rel="noopener noreferrer" style="display:none;">Open / Download</a>
+            </div>
+            <div id="urlStatus" class="status-message"></div>
+          </div>
+
+          <div class="video-container">
+            <video controls preload="metadata" id="mainVideo">
+              <source src="" type="video/mp4" />
+              Your browser does not support HTML5 video.
+            </video>
+            <div class="video-overlay" id="videoOverlay">
+              <p class="overlay-text">Paste a video URL and click Load video</p>
             </div>
           </div>
 
-          <video controls preload="metadata" poster="" id="mainVideo">
-            <source src="https://example.com/your-video.mp4" type="video/mp4" />
-            Your browser does not support HTML5 video.
-          </video>
-          <p class="caption">
-            Paste the public direct video URL above and click Load video.
-          </p>
+          <div class="video-info">
+            <p class="info-text" id="videoInfo"></p>
+            <div class="video-controls">
+              <span id="timeDisplay">00:00 / 00:00</span>
+              <span id="volumeDisplay">Volume: 100%</span>
+            </div>
+          </div>
+
+          <div class="share-section">
+            <p>Share this video:</p>
+            <div class="share-buttons">
+              <button id="shareButton" class="share-btn">📋 Copy Link</button>
+              <a id="twitterShare" class="share-btn" target="_blank" rel="noopener noreferrer">𝕏 Tweet</a>
+            </div>
+          </div>
         </section>
 
-        <section class="instructions">
-          <h2>Deployment Notes</h2>
-          <ol>
-            <li>
-              Upload the 6.33GB video to a public host like Google Drive,
-              Dropbox, OneDrive, AWS S3, or a streaming service.
-            </li>
-            <li>
-              Get a public direct URL for the file and paste it into the input
-              field above.
-            </li>
-            <li>
-              If the video does not play, confirm the URL points directly to the
-              MP4 file and is publicly accessible.
-            </li>
-            <li>
-              Deploy this repo using GitHub Pages from the
-              <strong>main</strong> branch, serving from the root folder.
-            </li>
+        <section class="how-it-works">
+          <h2>How It Works</h2>
+          <ol class="steps">
+            <li><strong>Upload your video</strong> to a public cloud host (Google Drive, Dropbox, OneDrive, AWS S3, etc.)</li>
+            <li><strong>Get the direct URL</strong> to your video file (must be publicly accessible)</li>
+            <li><strong>Paste the URL</strong> into the input field above and click "Load video"</li>
+            <li><strong>Share the page</strong> with others — they can play your video instantly</li>
           </ol>
-          <p>
-            GitHub cannot host a 6.33GB file directly in a normal repository,
-            so the video is served from an external host.
-          </p>
+        </section>
+
+        <section class="faq">
+          <h2>FAQ</h2>
+          <div class="faq-item">
+            <details>
+              <summary>Why can't GitHub host my 6.33GB video?</summary>
+              <p>GitHub's file size limits are much smaller. Most platforms limit individual files to a few GB. External hosting services are designed for large video files.</p>
+            </details>
+          </div>
+          <div class="faq-item">
+            <details>
+              <summary>What video formats are supported?</summary>
+              <p>The HTML5 video player supports MP4, WebM, and Ogg formats. MP4 is the most widely compatible.</p>
+            </details>
+          </div>
+          <div class="faq-item">
+            <details>
+              <summary>Is my video URL secure?</summary>
+              <p>Your video URL is only stored in the URL bar. It is not sent to any server or tracked on this site.</p>
+            </details>
+          </div>
+          <div class="faq-item">
+            <details>
+              <summary>Can I embed this on my website?</summary>
+              <p>Yes! Use an iframe with: <code>https://your-domain.com/jananayagan?v=YOUR_VIDEO_URL</code></p>
+            </details>
+          </div>
+        </section>
+
+        <section class="docs">
+          <h2>Documentation</h2>
+          <ul>
+            <li><a href="DEPLOYMENT.md">Complete Deployment Guide</a></li>
+            <li><a href="HOSTING_GUIDE.md">Video Hosting Options</a></li>
+            <li><a href="CHECKLIST.md">Quick Start Checklist</a></li>
+            <li><a href="README.md">Project README</a></li>
+          </ul>
         </section>
       </main>
 
       <footer>
-        <p>Jananayagan mini website — ready for GitHub Pages.</p>
+        <p>Jananayagan — Simple video streaming for everyone. <a href="https://github.com/Vinishraghav/jananayagan" target="_blank">View on GitHub</a></p>
       </footer>
     </div>
 
     <script>
       const loadButton = document.getElementById('loadButton');
+      const clearButton = document.getElementById('clearButton');
       const videoUrlInput = document.getElementById('videoUrl');
       const mainVideo = document.getElementById('mainVideo');
       const downloadButton = document.getElementById('downloadButton');
+      const videoOverlay = document.getElementById('videoOverlay');
+      const videoInfo = document.getElementById('videoInfo');
+      const urlStatus = document.getElementById('urlStatus');
+      const shareButton = document.getElementById('shareButton');
+      const twitterShare = document.getElementById('twitterShare');
+      const timeDisplay = document.getElementById('timeDisplay');
 
-      loadButton.addEventListener('click', () => {
+      function loadUrlFromQuery() {
+        const params = new URLSearchParams(window.location.search);
+        const videoUrl = params.get('v');
+        if (videoUrl) {
+          videoUrlInput.value = decodeURIComponent(videoUrl);
+          loadVideo();
+        }
+      }
+
+      function formatTime(seconds) {
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+      }
+
+      function loadVideo() {
         const url = videoUrlInput.value.trim();
-        if (!url) return;
+        if (!url) {
+          urlStatus.textContent = '❌ Please enter a valid URL';
+          urlStatus.className = 'status-message error';
+          return;
+        }
+        try {
+          new URL(url);
+        } catch {
+          urlStatus.textContent = '❌ Invalid URL format';
+          urlStatus.className = 'status-message error';
+          return;
+        }
         const source = mainVideo.querySelector('source');
         source.src = url;
         mainVideo.load();
         downloadButton.href = url;
+        downloadButton.style.display = 'inline-flex';
+        videoOverlay.style.display = 'none';
+        urlStatus.textContent = '✓ Video loaded';
+        urlStatus.className = 'status-message success';
+        const shareUrl = `${window.location.origin}${window.location.pathname}?v=${encodeURIComponent(url)}`;
+        shareButton.dataset.shareUrl = shareUrl;
+        twitterShare.href = `https://twitter.com/intent/tweet?text=Check%20out%20this%20video%20${encodeURIComponent(shareUrl)}`;
+      }
+
+      function clearInput() {
+        videoUrlInput.value = '';
+        mainVideo.querySelector('source').src = '';
+        mainVideo.load();
+        downloadButton.style.display = 'none';
+        videoOverlay.style.display = 'flex';
+        urlStatus.textContent = '';
+        videoInfo.textContent = '';
+      }
+
+      loadButton.addEventListener('click', loadVideo);
+      clearButton.addEventListener('click', clearInput);
+      videoUrlInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') loadVideo();
       });
+      shareButton.addEventListener('click', () => {
+        const url = shareButton.dataset.shareUrl || window.location.href;
+        navigator.clipboard.writeText(url).then(() => {
+          shareButton.textContent = '✓ Copied!';
+          setTimeout(() => { shareButton.textContent = '📋 Copy Link'; }, 2000);
+        });
+      });
+      mainVideo.addEventListener('play', () => {
+        videoOverlay.style.display = 'none';
+      });
+      mainVideo.addEventListener('pause', () => {
+        if (mainVideo.ended) videoInfo.textContent = 'Video finished ✓';
+      });
+      mainVideo.addEventListener('timeupdate', () => {
+        const duration = mainVideo.duration;
+        const current = mainVideo.currentTime;
+        if (!isNaN(duration)) {
+          timeDisplay.textContent = `${formatTime(current)} / ${formatTime(duration)}`;
+        }
+      });
+      mainVideo.addEventListener('loadedmetadata', () => {
+        videoInfo.textContent = `Duration: ${formatTime(mainVideo.duration)}`;
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.target === videoUrlInput) return;
+        if (e.key === ' ') {
+          e.preventDefault();
+          mainVideo.paused ? mainVideo.play() : mainVideo.pause();
+        } else if (e.key === 'f') {
+          if (mainVideo.requestFullscreen) mainVideo.requestFullscreen();
+        } else if (e.key === 'm') {
+          mainVideo.muted = !mainVideo.muted;
+        }
+      });
+      loadUrlFromQuery();
     </script>
   </body>
 </html>

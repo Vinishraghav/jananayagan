@@ -2,13 +2,7 @@
   color-scheme: dark;
   color: #f8f8f2;
   background: #121212;
-  font-family:
-    Inter,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 * {
@@ -27,36 +21,92 @@ body {
 .page {
   width: min(100%, 980px);
   padding: 24px;
+  line-height: 1.6;
 }
 
 header {
   text-align: center;
-  margin-bottom: 24px;
+  margin-bottom: 32px;
 }
 
 h1 {
-  margin: 0 0 12px;
+  margin: 0 0 8px;
   font-size: clamp(2rem, 4vw, 3rem);
 }
 
-p {
+.tagline {
   margin: 0;
+  color: #9aa0b8;
+  font-size: 1.1rem;
+}
+
+h2 {
+  margin-top: 24px;
+  margin-bottom: 16px;
+  font-size: 1.5rem;
+}
+
+p {
+  margin: 0 0 12px;
   line-height: 1.7;
   color: #c8c8c8;
 }
 
+a {
+  color: #8be9fd;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+code {
+  color: #ffb86c;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+
+details {
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+
+summary {
+  font-weight: 600;
+  color: #e6e6f0;
+  padding: 8px;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+summary:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+details[open] summary {
+  margin-bottom: 8px;
+}
+
+details p {
+  margin: 8px 0;
+  color: #b8b8c8;
+}
+
+/* Video Panel */
 .video-panel {
   background: #1f1f2b;
   border: 1px solid #2f2f3f;
   border-radius: 20px;
-  padding: 20px;
-  margin-bottom: 24px;
+  padding: 24px;
+  margin-bottom: 32px;
 }
 
 .video-input {
   display: grid;
-  gap: 10px;
-  margin-bottom: 18px;
+  gap: 12px;
+  margin-bottom: 20px;
 }
 
 .video-input label {
@@ -64,13 +114,42 @@ p {
   color: #e6e6f0;
 }
 
+.input-group {
+  display: flex;
+  gap: 8px;
+}
+
 .video-input input {
-  width: 100%;
+  flex: 1;
   padding: 12px 14px;
   border-radius: 12px;
   border: 1px solid #2f2f3f;
   background: #11111a;
   color: #f8f8f2;
+  font-size: 0.95rem;
+}
+
+.video-input input::placeholder {
+  color: #666;
+}
+
+.icon-btn {
+  width: 44px;
+  padding: 12px;
+  border: 1px solid #2f2f3f;
+  background: #11111a;
+  color: #f8f8f2;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.icon-btn:hover {
+  background-color: #1f1f2b;
 }
 
 .video-actions {
@@ -92,21 +171,55 @@ button {
   font-weight: 600;
   text-decoration: none;
   transition: transform 0.2s ease, background-color 0.2s ease;
+  gap: 8px;
 }
 
-button {
+button.primary,
+.button.primary {
   background: #8be9fd;
   color: #0b0b0f;
 }
 
-button:hover,
-.button:hover {
-  transform: translateY(-1px);
+button.primary:hover,
+.button.primary:hover {
+  transform: translateY(-2px);
+  background: #aaf3ff;
 }
 
+button.secondary,
 .button.secondary {
   background: #44475a;
   color: #f8f8f2;
+}
+
+button.secondary:hover,
+.button.secondary:hover {
+  transform: translateY(-2px);
+  background: #5a5a7a;
+}
+
+.status-message {
+  font-size: 0.9rem;
+  padding: 8px 12px;
+  border-radius: 8px;
+  display: none;
+}
+
+.status-message.error {
+  display: block;
+  background: rgba(255, 85, 85, 0.1);
+  color: #ff5555;
+}
+
+.status-message.success {
+  display: block;
+  background: rgba(85, 255, 85, 0.1);
+  color: #55ff55;
+}
+
+.video-container {
+  position: relative;
+  margin-bottom: 16px;
 }
 
 video {
@@ -116,39 +229,168 @@ video {
   background: #000;
 }
 
-.caption {
-  margin-top: 12px;
-  color: #9aa0b8;
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
 }
 
-.instructions {
+.overlay-text {
+  color: #9aa0b8;
+  font-size: 1.1rem;
+}
+
+.video-info {
+  background: #0f0f15;
+  padding: 12px 16px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.info-text {
+  color: #9aa0b8;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.video-controls {
+  display: flex;
+  gap: 16px;
+  font-size: 0.9rem;
+  color: #7f7f8f;
+}
+
+.share-section {
+  background: #0f0f15;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+.share-section p {
+  margin: 0 0 12px;
+  font-weight: 600;
+}
+
+.share-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.share-btn {
+  padding: 10px 14px;
+  background: #44475a;
+  color: #f8f8f2;
+  border: 1px solid #55556a;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.share-btn:hover {
+  background: #55556a;
+}
+
+/* Sections */
+.how-it-works,
+.faq,
+.docs {
   background: #16161f;
   border: 1px solid #2a2a3a;
   border-radius: 18px;
-  padding: 20px;
+  padding: 24px;
+  margin-bottom: 24px;
 }
 
-.instructions h2 {
-  margin-top: 0;
+.steps {
+  padding-left: 1.5rem;
 }
 
-.instructions ol {
-  padding-left: 1.2rem;
+.steps li {
+  margin-bottom: 16px;
+  line-height: 1.8;
 }
 
-.instructions li {
+.faq-item {
   margin-bottom: 12px;
 }
 
-code {
-  color: #ffb86c;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 2px 6px;
-  border-radius: 6px;
+.docs ul {
+  list-style: none;
+  padding: 0;
 }
 
+.docs li {
+  margin-bottom: 8px;
+}
+
+.docs a {
+  color: #8be9fd;
+  display: inline-block;
+  padding: 8px 12px;
+  background: rgba(139, 233, 253, 0.1);
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.docs a:hover {
+  background: rgba(139, 233, 253, 0.2);
+}
+
+/* Footer */
 footer {
   text-align: center;
-  margin-top: 18px;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid #2a2a3a;
   color: #7f7f8f;
+  font-size: 0.9rem;
+}
+
+footer a {
+  color: #8be9fd;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .page {
+    padding: 16px;
+  }
+
+  .video-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .video-actions {
+    width: 100%;
+  }
+
+  button,
+  .button {
+    width: 100%;
+  }
 }
