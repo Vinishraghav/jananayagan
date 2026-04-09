@@ -1,0 +1,6 @@
+# Ignore the local jana folder containing the large video
+jana/
+
+# Ignore system files
+.DS_Store
+Thumbs.db

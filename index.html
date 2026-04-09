@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jananayagan Video Showcase</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header>
+        <h1>Jananayagan Video Showcase</h1>
+        <p>
+          Watch the video from an external host and share the link with your
+          viewers.
+        </p>
+      </header>
+
+      <main>
+        <section class="video-panel">
+          <video controls preload="metadata" poster="" id="mainVideo">
+            <source src="https://example.com/your-video.mp4" type="video/mp4" />
+            Your browser does not support HTML5 video.
+          </video>
+          <p class="caption">
+            Replace the source URL above with your public video URL.
+          </p>
+        </section>
+
+        <section class="instructions">
+          <h2>Deployment Notes</h2>
+          <ol>
+            <li>
+              Upload the 6.33GB video to a public file host like Google Drive,
+              Dropbox, OneDrive, AWS S3, or a streaming service.
+            </li>
+            <li>
+              Get a public direct URL for the file and replace
+              <code>https://example.com/your-video.mp4</code> in
+              <code>index.html</code>.
+            </li>
+            <li>
+              Deploy this repo using GitHub Pages from the
+              <strong>main</strong> branch.
+            </li>
+          </ol>
+          <p>
+            GitHub cannot host a 6.33GB video file directly in a normal
+            repository.
+          </p>
+        </section>
+      </main>
+
+      <footer>
+        <p>Jananayagan mini website — ready for GitHub Pages.</p>
+      </footer>
+    </div>
+  </body>
+</html>
