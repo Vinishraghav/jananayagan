@@ -1,6 +1,9 @@
 # Ignore the local jana folder containing the large video
 jana/
 
+# Ignore the video file (too large for GitHub)
+Jananayagan-001.mp4
+
 # Ignore system files
 .DS_Store
 Thumbs.db
