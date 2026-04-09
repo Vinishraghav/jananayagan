@@ -11,81 +11,28 @@
   <body>
     <div class="page">
       <header>
-        <h1>🎬 Jananayagan</h1>
+        <h1>Jananayagan</h1>
       </header>
 
       <main>
-        <section class="video-panel">
-          <div class="video-input">
-            <label for="videoUrl">Video URL</label>
-            <div class="input-group">
-              <input
-                id="videoUrl"
-                type="url"
-                placeholder="Enter video URL"
-                autocomplete="off"
-              />
-            </div>
+        <section class="video-section">
+          <video controls preload="metadata" id="mainVideo">
+            <source src="YOUR_VIDEO_URL_HERE" type="video/mp4" />
+            Your browser does not support HTML5 video.
+          </video>
 
-            <div class="video-actions">
-              <button id="playButton" class="primary">
-                ▶️ Play Online
-              </button>
-              <a
-                id="downloadButton"
-                class="button secondary"
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                ⬇️ Download
-              </a>
-            </div>
-          </div>
-
-          <div class="video-container" id="videoContainer" style="display: none">
-            <video controls preload="metadata" id="mainVideo">
-              <source src="" type="video/mp4" />
-              Your browser does not support HTML5 video.
-            </video>
+          <div class="download-section">
+            <a
+              href="YOUR_VIDEO_URL_HERE"
+              class="download-btn"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              ⬇️ Download
+            </a>
           </div>
         </section>
       </main>
     </div>
-
-    <script>
-      const videoUrl = document.getElementById('videoUrl');
-      const playButton = document.getElementById('playButton');
-      const downloadButton = document.getElementById('downloadButton');
-      const mainVideo = document.getElementById('mainVideo');
-      const videoContainer = document.getElementById('videoContainer');
-
-      playButton.addEventListener('click', () => {
-        const url = videoUrl.value.trim();
-        if (!url) {
-          alert('Please enter a video URL');
-          return;
-        }
-        mainVideo.src = url;
-        videoContainer.style.display = 'block';
-        mainVideo.play();
-      });
-
-      downloadButton.addEventListener('click', (e) => {
-        const url = videoUrl.value.trim();
-        if (!url) {
-          e.preventDefault();
-          alert('Please enter a video URL');
-        } else {
-          downloadButton.href = url;
-        }
-      });
-
-      // Load video URL from URL parameters
-      const params = new URLSearchParams(window.location.search);
-      if (params.has('url')) {
-        videoUrl.value = params.get('url');
-      }
-    </script>
   </body>
 </html>
