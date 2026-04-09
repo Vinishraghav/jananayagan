@@ -3,451 +3,89 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Jananayagan - Secure video streaming with privacy controls." />
-    <meta name="referrer" content="no-referrer" />
+    <meta name="description" content="Jananayagan - Video Streaming" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <meta name="theme-color" content="#8be9fd" />
-    <meta name="color-scheme" content="dark" />
-    
-    <title>Jananayagan - Secure Video Player</title>
+    <title>Jananayagan</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div class="page">
       <header>
-        <h1>🔒 Jananayagan Secure</h1>
-        <p class="tagline">Private video streaming with full security controls.</p>
+        <h1>🎬 Jananayagan</h1>
       </header>
 
       <main>
-        <!-- Security Toggle -->
-        <section class="security-toggle">
-          <button id="securityModeBtn" class="security-btn" title="Toggle security features">
-            🔓 Standard Mode | 🔒 Private Mode
-          </button>
-          <p id="securityStatus" class="security-status"></p>
-        </section>
-
-        <!-- Privacy Controls Panel -->
-        <section class="privacy-panel" id="privacyPanel">
-          <h3>🛡️ Privacy Controls</h3>
-          
-          <div class="control-group">
-            <label class="checkbox-label">
-              <input type="checkbox" id="privateMode" />
-              <span>Private Mode</span>
-              <span class="help-text">No tracking, no social sharing, no URL logging</span>
-            </label>
-          </div>
-
-          <div class="control-group">
-            <label class="checkbox-label">
-              <input type="checkbox" id="passwordProtect" />
-              <span>Password Protection</span>
-              <span class="help-text">Only people with password can watch</span>
-            </label>
-          </div>
-
-          <div id="passwordInput" class="password-group" style="display:none;">
-            <input type="password" id="videoPwd" placeholder="Set a password for this video" />
-            <button id="setPasswordBtn" class="button-small">Set Password</button>
-          </div>
-
-          <div class="control-group">
-            <label class="checkbox-label">
-              <input type="checkbox" id="disableRightClick" />
-              <span>Disable Right-Click</span>
-              <span class="help-text">Prevent video download attempts</span>
-            </label>
-          </div>
-
-          <div class="control-group">
-            <label class="checkbox-label">
-              <input type="checkbox" id="corsProxy" />
-              <span>Use CORS Proxy</span>
-              <span class="help-text">Hide your identity from video host</span>
-            </label>
-          </div>
-
-          <div class="control-group">
-            <label class="checkbox-label">
-              <input type="checkbox" id="hideIP" />
-              <span>Hide IP Address</span>
-              <span class="help-text">Prevent IP tracking (use VPN recommended)</span>
-            </label>
-          </div>
-        </section>
-
-        <!-- Main Video Panel -->
         <section class="video-panel">
           <div class="video-input">
-            <label for="videoUrl">Video URL (Secure)</label>
+            <label for="videoUrl">Video URL</label>
             <div class="input-group">
-              <input 
-                id="videoUrl" 
-                type="url" 
-                placeholder="https://example.com/your-video.mp4" 
-                value=""
+              <input
+                id="videoUrl"
+                type="url"
+                placeholder="Enter video URL"
                 autocomplete="off"
               />
-              <button id="clearButton" type="button" class="icon-btn" title="Clear input">✕</button>
             </div>
+
             <div class="video-actions">
-              <button id="loadButton" type="button" class="primary">Load Video Securely</button>
-              <a id="downloadButton" class="button secondary" href="#" target="_blank" rel="noopener noreferrer" style="display:none;">Open / Download</a>
+              <button id="playButton" class="primary">
+                ▶️ Play Online
+              </button>
+              <a
+                id="downloadButton"
+                class="button secondary"
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                ⬇️ Download
+              </a>
             </div>
-            <div id="urlStatus" class="status-message"></div>
-            <div id="securityWarning" class="security-warning" style="display:none;"></div>
           </div>
 
-          <!-- Password Input for Protected Videos -->
-          <div id="passwordPrompt" class="password-prompt" style="display:none;">
-            <p>🔒 This video is password protected</p>
-            <input type="password" id="enterPassword" placeholder="Enter password" />
-            <button id="unlockButton" class="button-small">Unlock</button>
-          </div>
-
-          <div class="video-container">
-            <video controls preload="metadata" id="mainVideo" controlsList="nodownload">
+          <div class="video-container" id="videoContainer" style="display: none">
+            <video controls preload="metadata" id="mainVideo">
               <source src="" type="video/mp4" />
               Your browser does not support HTML5 video.
             </video>
-            <div class="video-overlay" id="videoOverlay">
-              <p class="overlay-text">🔒 Paste a private video URL</p>
-            </div>
           </div>
-
-          <div class="video-info">
-            <p class="info-text" id="videoInfo"></p>
-            <div class="video-controls">
-              <span id="timeDisplay">00:00 / 00:00</span>
-              <span id="volumeDisplay">Volume: 100%</span>
-            </div>
-          </div>
-
-          <!-- Share Section (Hidden in Private Mode) -->
-          <div class="share-section" id="shareSection">
-            <p>⚠️ Share Securely (Private links only to trusted people)</p>
-            <div class="share-buttons">
-              <button id="shareButton" class="share-btn">🔗 Copy Private Link</button>
-              <button id="regenerateBtn" class="share-btn">🔄 Regenerate Link</button>
-            </div>
-          </div>
-        </section>
-
-        <!-- Security Info -->
-        <section class="security-info">
-          <h2>🔐 Security Features</h2>
-          <ul>
-            <li>✅ No tracking cookies - All privacy local to your browser</li>
-            <li>✅ No analytics - Your viewing is completely private</li>
-            <li>✅ No URL logging - URLs never stored on servers</li>
-            <li>✅ No personal data collection - Anonymous playback</li>
-            <li>✅ HTTPS encryption - All data encrypted in transit</li>
-            <li>✅ Password protection - Optional encryption layer</li>
-            <li>✅ Private mode - Disables all tracking attempts</li>
-            <li>✅ Open source - Transparency and auditability</li>
-          </ul>
-        </section>
-
-        <!-- Privacy Guidelines -->
-        <section class="privacy-guide">
-          <h2>🛡️ Privacy Guidelines</h2>
-          <div class="faq-item">
-            <details>
-              <summary>How do I stay completely anonymous?</summary>
-              <div class="detail-content">
-                <p>1. Use a VPN to hide your IP address</p>
-                <p>2. Enable Private Mode on this player</p>
-                <p>3. Use CORS Proxy to hide from video host</p>
-                <p>4. Host video on privacy-friendly service (not Google/Dropbox if concerned)</p>
-                <p>5. Share link only via encrypted channels</p>
-              </div>
-            </details>
-          </div>
-
-          <div class="faq-item">
-            <details>
-              <summary>Can the video host track me?</summary>
-              <div class="detail-content">
-                <p><strong>Default:</strong> Yes - They see your IP when you access the video</p>
-                <p><strong>With VPN:</strong> Your IP is hidden</p>
-                <p><strong>With CORS Proxy:</strong> The proxy's IP is shown, not yours</p>
-                <p><strong>Recommendation:</strong> Use both VPN + CORS Proxy for maximum privacy</p>
-              </div>
-            </details>
-          </div>
-
-          <div class="faq-item">
-            <details>
-              <summary>Can GitHub track me?</summary>
-              <div class="detail-content">
-                <p>No. GitHub Pages doesn't track individual visitors. All processing happens in your browser.</p>
-                <p>Your video URL is stored only in your device's URL bar - never sent to any server.</p>
-              </div>
-            </details>
-          </div>
-
-          <div class="faq-item">
-            <details>
-              <summary>Can someone record my video?</summary>
-              <div class="detail-content">
-                <p>The "Disable Right-Click" option prevents browser context menu, but:</p>
-                <p>⚠️ <strong>Reality:</strong> Screen recording tools can still record the video</p>
-                <p>For maximum protection: Use password protection + private links only</p>
-                <p>Consider watermarking your video before uploading</p>
-              </div>
-            </details>
-          </div>
-
-          <div class="faq-item">
-            <details>
-              <summary>What data is collected?</summary>
-              <div class="detail-content">
-                <p>✅ <strong>Not collected:</strong></p>
-                <p>- Your IP address (unless you visit video host directly)</p>
-                <p>- Your viewing history (local browser only)</p>
-                <p>- Cookies or tracking scripts</p>
-                <p>- Personal information</p>
-                <p>- Viewing duration or patterns</p>
-              </div>
-            </details>
-          </div>
-        </section>
-
-        <!-- Security Best Practices -->
-        <section class="best-practices">
-          <h2>💡 Best Practices for Maximum Privacy</h2>
-          <ol>
-            <li><strong>Use a VPN</strong> - Hide your real IP address from everyone</li>
-            <li><strong>Enable Private Mode</strong> - Turn off all tracking features</li>
-            <li><strong>Use Private Link</strong> - Share only generated encrypted links, not direct URLs</li>
-            <li><strong>Password Protect</strong> - Add password to video if extremely sensitive</li>
-            <li><strong>Enable CORS Proxy</strong> - Hide identity from video host</li>
-            <li><strong>Share Carefully</strong> - Only share link via encrypted channels (Signal, WhatsApp, etc.)</li>
-            <li><strong>Use Incognito Window</strong> - Browse in private/incognito mode</li>
-            <li><strong>Disable Browser Tracking</strong> - Use Firefox with privacy settings or Brave browser</li>
-            <li><strong>Don't Enable Auto-Share</strong> - Don't let browser auto-save your video links</li>
-            <li><strong>Monitor Access</strong> - If video host supports access logs, review them regularly</li>
-          </ol>
         </section>
       </main>
-
-      <footer>
-        <p>🔒 Jananayagan Secure — Private video streaming with zero tracking. 
-          <a href="https://github.com/Vinishraghav/jananayagan" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-        </p>
-      </footer>
     </div>
 
     <script>
-      // Prevent accidental data exposure
-      const videoUrlInput = document.getElementById('videoUrl');
-      const loadButton = document.getElementById('loadButton');
-      const clearButton = document.getElementById('clearButton');
-      const mainVideo = document.getElementById('mainVideo');
+      const videoUrl = document.getElementById('videoUrl');
+      const playButton = document.getElementById('playButton');
       const downloadButton = document.getElementById('downloadButton');
-      const videoOverlay = document.getElementById('videoOverlay');
-      const videoInfo = document.getElementById('videoInfo');
-      const urlStatus = document.getElementById('urlStatus');
-      const shareButton = document.getElementById('shareButton');
-      const securityWarning = document.getElementById('securityWarning');
-      const timeDisplay = document.getElementById('timeDisplay');
-      const securityModeBtn = document.getElementById('securityModeBtn');
-      const securityStatus = document.getElementById('securityStatus');
-      const privacyPanel = document.getElementById('privacyPanel');
-      const privateModeCheckbox = document.getElementById('privateMode');
-      const passwordCheckbox = document.getElementById('passwordProtect');
-      const passwordInput = document.getElementById('passwordInput');
-      const disableRightClick = document.getElementById('disableRightClick');
-      const corsProxy = document.getElementById('corsProxy');
-      const shareSection = document.getElementById('shareSection');
-      const passwordPrompt = document.getElementById('passwordPrompt');
-      const enterPassword = document.getElementById('enterPassword');
-      const unlockButton = document.getElementById('unlockButton');
-      const setPasswordBtn = document.getElementById('setPasswordBtn');
-      const videoPwd = document.getElementById('videoPwd');
+      const mainVideo = document.getElementById('mainVideo');
+      const videoContainer = document.getElementById('videoContainer');
 
-      let videoPassword = null;
-      let passwordRequired = false;
-      let isSecureMode = false;
-
-      // Disable right-click on video
-      function setupRightClickProtection() {
-        if (disableRightClick.checked) {
-          document.addEventListener('contextmenu', (e) => {
-            if (e.target === mainVideo || mainVideo.contains(e.target)) {
-              e.preventDefault();
-              urlStatus.textContent = '⚠️ Right-click disabled for privacy';
-            }
-          });
-        }
-      }
-
-      // CORS proxy wrapper for privacy
-      function getProxiedUrl(url) {
-        if (corsProxy.checked) {
-          return `https://cors-anywhere.herokuapp.com/${url}`;
-        }
-        return url;
-      }
-
-      function formatTime(seconds) {
-        const mins = Math.floor(seconds / 60);
-        const secs = Math.floor(seconds % 60);
-        return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-      }
-
-      function toggleSecureMode() {
-        isSecureMode = !isSecureMode;
-        if (isSecureMode) {
-          privateModeCheckbox.checked = true;
-          passwordCheckbox.checked = false;
-          disableRightClick.checked = true;
-          corsProxy.checked = true;
-          shareSection.style.display = 'none';
-          securityStatus.textContent = '🔒 MAXIMUM SECURITY MODE ENABLED';
-          securityStatus.className = 'security-status active';
-          securityWarning.style.display = 'block';
-          securityWarning.textContent = '⚠️ Maximum security mode active - Use VPN for complete anonymity';
-        } else {
-          shareSection.style.display = 'block';
-          securityStatus.textContent = 'Standard mode - Share carefully';
-          securityStatus.className = 'security-status';
-        }
-      }
-
-      function setPassword() {
-        const pwd = videoPwd.value.trim();
-        if (pwd.length < 4) {
-          alert('Password must be at least 4 characters');
-          return;
-        }
-        videoPassword = pwd;
-        passwordRequired = true;
-        videoPwd.value = '';
-        alert('✓ Password set. Video will require password to play.');
-        urlStatus.textContent = '🔒 Password protection enabled';
-      }
-
-      function checkPassword() {
-        const entered = enterPassword.value;
-        if (entered === videoPassword) {
-          passwordPrompt.style.display = 'none';
-          mainVideo.play();
-          return true;
-        } else {
-          alert('❌ Incorrect password');
-          return false;
-        }
-      }
-
-      function loadVideo() {
-        const url = videoUrlInput.value.trim();
+      playButton.addEventListener('click', () => {
+        const url = videoUrl.value.trim();
         if (!url) {
-          urlStatus.textContent = '❌ Please enter a valid URL';
-          urlStatus.className = 'status-message error';
+          alert('Please enter a video URL');
           return;
         }
-
-        try {
-          new URL(url);
-        } catch {
-          urlStatus.textContent = '❌ Invalid URL format';
-          urlStatus.className = 'status-message error';
-          return;
-        }
-
-        if (passwordRequired && !passwordCheckbox.checked) {
-          passwordPrompt.style.display = 'block';
-          enterPassword.focus();
-          return;
-        }
-
-        const proxyUrl = getProxiedUrl(url);
-        const source = mainVideo.querySelector('source');
-        source.src = proxyUrl;
-        mainVideo.load();
-        downloadButton.href = url;
-        downloadButton.style.display = 'inline-flex';
-        videoOverlay.style.display = 'none';
-        urlStatus.textContent = '✓ Video loaded securely';
-        urlStatus.className = 'status-message success';
-
-        if (!privateModeCheckbox.checked) {
-          const shareUrl = `${window.location.origin}${window.location.pathname}?v=${encodeURIComponent(url)}`;
-          shareButton.dataset.shareUrl = shareUrl;
-        }
-      }
-
-      function clearInput() {
-        videoUrlInput.value = '';
-        mainVideo.querySelector('source').src = '';
-        mainVideo.load();
-        downloadButton.style.display = 'none';
-        videoOverlay.style.display = 'flex';
-        urlStatus.textContent = '';
-        videoInfo.textContent = '';
-        passwordPrompt.style.display = 'none';
-        passwordRequired = false;
-      }
-
-      // Event listeners
-      securityModeBtn.addEventListener('click', toggleSecureMode);
-      passwordCheckbox.addEventListener('change', () => {
-        passwordInput.style.display = passwordCheckbox.checked ? 'block' : 'none';
-      });
-      setPasswordBtn.addEventListener('click', setPassword);
-      unlockButton.addEventListener('click', checkPassword);
-      loadButton.addEventListener('click', loadVideo);
-      clearButton.addEventListener('click', clearInput);
-
-      videoUrlInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') loadVideo();
+        mainVideo.src = url;
+        videoContainer.style.display = 'block';
+        mainVideo.play();
       });
 
-      shareButton.addEventListener('click', () => {
-        const url = shareButton.dataset.shareUrl || window.location.href;
-        navigator.clipboard.writeText(url).then(() => {
-          shareButton.textContent = '✓ Copied!';
-          setTimeout(() => { shareButton.textContent = '🔗 Copy Private Link'; }, 2000);
-        });
-      });
-
-      mainVideo.addEventListener('play', () => {
-        videoOverlay.style.display = 'none';
-      });
-
-      mainVideo.addEventListener('timeupdate', () => {
-        const duration = mainVideo.duration;
-        const current = mainVideo.currentTime;
-        if (!isNaN(duration)) {
-          timeDisplay.textContent = `${formatTime(current)} / ${formatTime(duration)}`;
-        }
-      });
-
-      // Keyboard shortcuts
-      document.addEventListener('keydown', (e) => {
-        if (e.target === videoUrlInput || e.target === enterPassword) return;
-        if (e.key === ' ') {
+      downloadButton.addEventListener('click', (e) => {
+        const url = videoUrl.value.trim();
+        if (!url) {
           e.preventDefault();
-          mainVideo.paused ? mainVideo.play() : mainVideo.pause();
-        } else if (e.key === 'f') {
-          if (mainVideo.requestFullscreen) mainVideo.requestFullscreen();
-        } else if (e.key === 'm') {
-          mainVideo.muted = !mainVideo.muted;
+          alert('Please enter a video URL');
+        } else {
+          downloadButton.href = url;
         }
       });
 
-      // Setup protections
-      setupRightClickProtection();
-
-      // No referrer disclosure
-      document.addEventListener('beforeunload', () => {
-        if (privateModeCheckbox.checked) {
-          videoUrlInput.value = '';
-        }
-      });
+      // Load video URL from URL parameters
+      const params = new URLSearchParams(window.location.search);
+      if (params.has('url')) {
+        videoUrl.value = params.get('url');
+      }
     </script>
   </body>
 </html>
